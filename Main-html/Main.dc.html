@@ -1,0 +1,438 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap">
+  <script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    :root{
+      --ink: oklch(15% 0.025 258);
+      --ink-2: oklch(19% 0.028 258);
+      --ink-3: oklch(25% 0.03 258);
+      --cream: oklch(95.5% 0.018 85);
+      --cream-2: oklch(91% 0.022 82);
+      --gold: oklch(76% 0.13 80);
+      --gold-dim: oklch(62% 0.11 78);
+      --maroon: oklch(40% 0.13 25);
+      --ivory: oklch(88% 0.02 85);
+      --muted: oklch(70% 0.03 85 / 0.62);
+      --muted-d: oklch(50% 0.02 258);
+      --line: oklch(38% 0.03 258);
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;background:var(--ink);font-family:'Manrope',system-ui,sans-serif;color:var(--ivory);}
+    h1,h2,h3{font-family:'Libre Caslon Display',Georgia,serif;font-weight:400;margin:0;letter-spacing:-0.005em;}
+    .script{font-family:'Libre Caslon Text',Georgia,serif;font-style:italic;font-weight:400;}
+    p{margin:0;}
+    a{color:inherit;text-decoration:none;}
+    .mono{font-family:'IBM Plex Mono',monospace;}
+    .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;}
+    .btn{display:inline-flex;align-items:center;gap:9px;padding:16px 30px;font-weight:600;font-size:14px;letter-spacing:0.02em;cursor:pointer;white-space:nowrap;font-family:'Manrope',sans-serif;}
+    .btn-primary{background:var(--gold);color:var(--ink);}
+    .btn-outline{background:transparent;border:1px solid oklch(50% 0.02 258);color:var(--ivory);}
+    .notch{position:absolute;width:22px;height:22px;border-radius:50%;background:var(--ink-2);}
+    .notch-cream{background:var(--ink);}
+  </style>
+</helmet>
+
+<div style="width:1440px;background:var(--ink);position:relative;">
+
+  <!-- subtle grain / vignette -->
+  <svg width="0" height="0" style="position:absolute;">
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.02 0"/></filter>
+  </svg>
+  <div style="position:absolute;inset:0;pointer-events:none;z-index:50;filter:url(#grain);"></div>
+
+  <!-- ============ NAV ============ -->
+  <div style="max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:34px 40px 0;position:relative;z-index:2;">
+    <div style="display:flex;align-items:baseline;gap:10px;">
+      <span style="font-family:'Libre Caslon Display',serif;font-size:26px;color:var(--gold);">GT</span>
+      <span class="script" style="font-size:20px;color:var(--ivory);">Jobs</span>
+      <span class="tag" style="color:var(--muted);margin-left:6px;border-left:1px solid var(--line);padding-left:12px;">IND &#8594; SGP</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:38px;font-size:14px;color:oklch(82% 0.02 85);">
+      <a href="#industries">Industries</a>
+      <a href="#process">Process</a>
+      <a href="#employers">Employers</a>
+      <a href="#seekers">Job Seekers</a>
+    </div>
+    <a href="#contact" class="btn btn-primary">Enquire Now</a>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <div style="max-width:1280px;margin:0 auto;padding:96px 40px 0;position:relative;z-index:2;">
+    <div class="tag" style="color:var(--gold-dim);display:flex;align-items:center;gap:10px;margin-bottom:34px;">
+      <span style="width:7px;height:7px;border-radius:50%;background:var(--gold);display:inline-block;"></span>
+      PASSENGER: SKILLED WORKFORCE &nbsp;&nbsp;/&nbsp;&nbsp; ROUTE: INDIA&#8211;SINGAPORE &nbsp;&nbsp;/&nbsp;&nbsp; STATUS: CONFIRMED
+    </div>
+
+    <div style="position:relative;">
+      <h1 style="font-size:78px;line-height:1.04;color:var(--ivory);max-width:840px;">
+        A confirmed route from skilled workers to <span class="script" style="color:var(--gold);font-size:80px;">Singapore</span> employers.
+      </h1>
+
+      <!-- rotated stamp -->
+      <svg width="196" height="196" viewBox="0 0 200 200" style="position:absolute;right:-4px;top:-30px;transform:rotate(-9deg);opacity:0.95;">
+        <defs><path id="circlePath" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+        <circle cx="100" cy="100" r="92" fill="none" stroke="var(--gold)" stroke-width="1"/>
+        <circle cx="100" cy="100" r="64" fill="none" stroke="var(--gold)" stroke-width="1" stroke-dasharray="1.5 4.5"/>
+        <text font-size="10.6" letter-spacing="3.2" fill="var(--gold)"><textPath href="#circlePath" startOffset="0%">&#8226; LICENSED &#8226; VERIFIED &#8226; TRADE-TESTED &#8226; EST. 20XX </textPath></text>
+        <g transform="translate(100,100)" stroke="var(--gold)" stroke-width="1.3" fill="none">
+          <path d="M0,-24 L0,24 M-24,0 L24,0"/>
+          <circle r="7" />
+        </g>
+      </svg>
+    </div>
+
+    <p style="margin-top:32px;font-size:17px;line-height:1.7;color:var(--muted);max-width:520px;">
+      End-to-end recruitment, verification and deployment &#8212; for employers who need reliable manpower, and workers who deserve a transparent, honest path to Singapore.
+    </p>
+
+    <div style="display:flex;gap:16px;margin-top:44px;">
+      <a href="#employers" class="btn btn-primary">For Employers</a>
+      <a href="#seekers" class="btn btn-outline">For Job Seekers</a>
+    </div>
+
+    <!-- flight path -->
+    <svg width="1200" height="150" viewBox="0 0 1200 150" style="margin-top:56px;overflow:visible;">
+      <path d="M30,110 C 340,10 860,10 1170,110" fill="none" stroke="var(--line)" stroke-width="1.4" stroke-dasharray="1 7" stroke-linecap="round"/>
+      <g transform="translate(30,110)">
+        <circle r="4.5" fill="var(--gold)"/>
+        <text class="mono" x="0" y="26" font-size="11" fill="var(--muted)" text-anchor="middle">IND</text>
+      </g>
+      <g transform="translate(1170,110)">
+        <circle r="4.5" fill="var(--gold)"/>
+        <text class="mono" x="0" y="26" font-size="11" fill="var(--muted)" text-anchor="middle">SGP</text>
+      </g>
+      <g transform="translate(600,32) rotate(18)" fill="var(--gold)">
+        <path d="M0,-7 L2.4,-1 L9,1.2 L9,3 L2.4,2.2 L0.8,7.5 L3,8.6 L3,10 L0,9 L-3,10 L-3,8.6 L-0.8,7.5 L-2.4,2.2 L-9,3 L-9,1.2 L-2.4,-1 Z"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- ============ TICKET STRIP (cream, overlapping) ============ -->
+  <div style="max-width:1180px;margin:-8px auto 0;padding:0 40px 130px;position:relative;z-index:3;">
+    <div style="background:var(--cream);color:var(--ink);box-shadow:0 30px 60px -20px oklch(0% 0 0 / 0.5);position:relative;">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);">
+
+        <div style="padding:34px 32px;border-right:1px dashed oklch(20% 0.02 85 / 0.25);position:relative;">
+          <div class="notch" style="top:-11px;left:-11px;"></div>
+          <div class="tag" style="color:var(--maroon);margin-bottom:10px;">Credential</div>
+          <div style="font-size:15px;font-weight:600;">Licensed Recruitment Agency</div>
+        </div>
+        <div style="padding:34px 32px;border-right:1px dashed oklch(20% 0.02 85 / 0.25);">
+          <div class="tag" style="color:var(--maroon);margin-bottom:10px;">Compliance</div>
+          <div style="font-size:15px;font-weight:600;">MOM-Compliant Documentation</div>
+        </div>
+        <div style="padding:34px 32px;border-right:1px dashed oklch(20% 0.02 85 / 0.25);">
+          <div class="tag" style="color:var(--maroon);margin-bottom:10px;">Candidates</div>
+          <div style="font-size:15px;font-weight:600;">Verified &amp; Trade-Tested</div>
+        </div>
+        <div style="padding:34px 32px;position:relative;">
+          <div class="notch" style="top:-11px;right:-11px;left:auto;"></div>
+          <div class="tag" style="color:var(--maroon);margin-bottom:10px;">Destination</div>
+          <div style="font-size:15px;font-weight:600;">1.3521&#176; N, 103.8198&#176; E</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TWO AUDIENCES (visa cards) ============ -->
+  <div style="background:var(--ink-2);padding:110px 0 120px;position:relative;z-index:2;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:64px;">
+        <h2 style="font-size:40px;color:var(--ivory);">One process, <span class="script" style="color:var(--gold);">two applications.</span></h2>
+        <span class="tag" style="color:var(--muted);">FORM A &amp; B</span>
+      </div>
+
+      <div style="display:flex;gap:56px;justify-content:center;">
+
+        <div style="background:var(--cream);color:var(--ink);width:460px;padding:44px 40px;position:relative;transform:rotate(-1.6deg);box-shadow:0 24px 50px -18px oklch(0% 0 0 / 0.45);">
+          <div class="mono" style="position:absolute;top:24px;right:28px;font-size:10.5px;color:var(--muted-d);letter-spacing:0.08em;">FILE&nbsp;NO.&nbsp;EMP&#8211;001</div>
+          <div class="tag" style="color:var(--maroon);margin-bottom:18px;">Application &#8226; Employer</div>
+          <h3 style="font-size:27px;color:var(--ink);margin-bottom:18px;">For Employers in Singapore</h3>
+          <p style="font-size:14.5px;line-height:1.7;color:oklch(30% 0.02 258 / 0.85);margin-bottom:26px;">
+            Access a screened, trade-tested pipeline of workers across construction, marine, manufacturing, hospitality and domestic roles. Sourcing, testing, documentation and deployment &#8212; handled end to end.
+          </p>
+          <a href="#contact" style="font-weight:700;font-size:13.5px;color:var(--maroon);display:inline-flex;align-items:center;gap:7px;text-transform:uppercase;letter-spacing:0.04em;">
+            Request Manpower
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <svg width="58" height="58" viewBox="0 0 58 58" style="position:absolute;bottom:22px;right:26px;opacity:0.85;transform:rotate(8deg);">
+            <circle cx="29" cy="29" r="26" fill="none" stroke="var(--maroon)" stroke-width="1.2"/>
+            <text class="mono" x="29" y="26" font-size="8" fill="var(--maroon)" text-anchor="middle" letter-spacing="0.5">APPROVED</text>
+            <text class="mono" x="29" y="37" font-size="7" fill="var(--maroon)" text-anchor="middle">GT&#8226;JOBS</text>
+          </svg>
+        </div>
+
+        <div style="background:var(--cream);color:var(--ink);width:460px;padding:44px 40px;position:relative;transform:rotate(1.6deg);box-shadow:0 24px 50px -18px oklch(0% 0 0 / 0.45);margin-top:22px;">
+          <div class="mono" style="position:absolute;top:24px;right:28px;font-size:10.5px;color:var(--muted-d);letter-spacing:0.08em;">FILE&nbsp;NO.&nbsp;SEEK&#8211;001</div>
+          <div class="tag" style="color:var(--maroon);margin-bottom:18px;">Application &#8226; Job Seeker</div>
+          <h3 style="font-size:27px;color:var(--ink);margin-bottom:18px;">For Job Seekers</h3>
+          <p style="font-size:14.5px;line-height:1.7;color:oklch(30% 0.02 258 / 0.85);margin-bottom:26px;">
+            A transparent, verified path to legitimate employment in Singapore. Clear terms, no hidden fees, and support from your first interview through to your first pay day and beyond.
+          </p>
+          <a href="#contact" style="font-weight:700;font-size:13.5px;color:var(--maroon);display:inline-flex;align-items:center;gap:7px;text-transform:uppercase;letter-spacing:0.04em;">
+            Apply Now
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <svg width="58" height="58" viewBox="0 0 58 58" style="position:absolute;bottom:22px;right:26px;opacity:0.85;transform:rotate(-6deg);">
+            <circle cx="29" cy="29" r="26" fill="none" stroke="var(--maroon)" stroke-width="1.2"/>
+            <text class="mono" x="29" y="26" font-size="8" fill="var(--maroon)" text-anchor="middle" letter-spacing="0.5">APPROVED</text>
+            <text class="mono" x="29" y="37" font-size="7" fill="var(--maroon)" text-anchor="middle">GT&#8226;JOBS</text>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ INDUSTRIES (manifest) ============ -->
+  <div id="industries" style="padding:120px 0 110px;position:relative;z-index:2;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+      <div style="display:grid;grid-template-columns:0.8fr 1.2fr;gap:60px;">
+        <div>
+          <div class="tag" style="color:var(--gold-dim);margin-bottom:16px;">Cargo Manifest</div>
+          <h2 style="font-size:40px;color:var(--ivory);">Industries<br>we serve</h2>
+        </div>
+
+        <div>
+          <div style="display:flex;align-items:center;gap:24px;padding:22px 0;border-bottom:1px dashed var(--line);">
+            <span class="mono" style="font-size:13px;color:var(--gold-dim);width:28px;">01</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18v-1a8 8 0 0116 0v1"/><path d="M2 18h20"/><path d="M12 7v3"/></svg>
+            <span style="font-size:18px;flex:1;">Construction</span>
+            <span class="mono" style="font-size:11px;color:var(--muted);">SECTOR&nbsp;A</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:24px;padding:22px 0;border-bottom:1px dashed var(--line);">
+            <span class="mono" style="font-size:13px;color:var(--gold-dim);width:28px;">02</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><path d="M12 7.4V21"/><path d="M5 13H2a10 10 0 0020 0h-3"/></svg>
+            <span style="font-size:18px;flex:1;">Marine &amp; Shipyard</span>
+            <span class="mono" style="font-size:11px;color:var(--muted);">SECTOR&nbsp;B</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:24px;padding:22px 0;border-bottom:1px dashed var(--line);">
+            <span class="mono" style="font-size:13px;color:var(--gold-dim);width:28px;">03</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="18" height="8"/><path d="M6 13V9l4 3V9l4 3V9l4 3v1"/><rect x="16" y="4" width="3" height="5"/><path d="M16.4 4c.4-.9.4-1.3 0-2.1M18.6 4c.4-.9.4-1.3 0-2.1"/></svg>
+            <span style="font-size:18px;flex:1;">Manufacturing</span>
+            <span class="mono" style="font-size:11px;color:var(--muted);">SECTOR&nbsp;C</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:24px;padding:22px 0;border-bottom:1px dashed var(--line);">
+            <span class="mono" style="font-size:13px;color:var(--gold-dim);width:28px;">04</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v8a2 2 0 002 2v8M9 3v6M13 3v6M9 6h4M18 3c-2 2-2 4-2 6s2 3 2 3v8"/></svg>
+            <span style="font-size:18px;flex:1;">F&amp;B &amp; Hospitality</span>
+            <span class="mono" style="font-size:11px;color:var(--muted);">SECTOR&nbsp;D</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:24px;padding:22px 0;border-bottom:1px dashed var(--line);">
+            <span class="mono" style="font-size:13px;color:var(--gold-dim);width:28px;">05</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V11l8-6 8 6v10"/><path d="M9 21v-7h6v7"/></svg>
+            <span style="font-size:18px;flex:1;">Domestic &amp; Household</span>
+            <span class="mono" style="font-size:11px;color:var(--muted);">SECTOR&nbsp;E</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:24px;padding:22px 0;">
+            <span class="mono" style="font-size:13px;color:var(--gold-dim);width:28px;">06</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="13" height="9"/><path d="M15 11h4l3 3v3h-7z"/><circle cx="6.5" cy="19" r="1.6"/><circle cx="17.5" cy="19" r="1.6"/></svg>
+            <span style="font-size:18px;flex:1;">Logistics &amp; Warehousing</span>
+            <span class="mono" style="font-size:11px;color:var(--muted);">SECTOR&nbsp;F</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PROCESS (itinerary) ============ -->
+  <div id="process" style="background:var(--ink-2);padding:120px 0;position:relative;z-index:2;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:88px;">
+        <h2 style="font-size:40px;color:var(--ivory);">Your <span class="script" style="color:var(--gold);">itinerary,</span> start to finish.</h2>
+        <span class="tag" style="color:var(--muted);">5 CHECKPOINTS</span>
+      </div>
+
+      <div style="position:relative;">
+        <div style="position:absolute;top:19px;left:19px;right:19px;border-top:1px dashed var(--line);"></div>
+        <div style="display:flex;justify-content:space-between;">
+
+          <div style="display:flex;flex-direction:column;gap:22px;width:19%;">
+            <div style="width:38px;height:38px;border-radius:50%;background:var(--ink-2);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;">
+              <span class="mono" style="font-size:12px;color:var(--gold);">01</span>
+            </div>
+            <h3 style="font-size:18px;color:var(--ivory);font-family:'Manrope';font-weight:700;">Registration</h3>
+            <p style="font-size:13px;line-height:1.65;color:var(--muted);">Employer shares role requirements, or a candidate registers their profile.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:22px;width:19%;">
+            <div style="width:38px;height:38px;border-radius:50%;background:var(--ink-2);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;">
+              <span class="mono" style="font-size:12px;color:var(--gold);">02</span>
+            </div>
+            <h3 style="font-size:18px;color:var(--ivory);font-family:'Manrope';font-weight:700;">Screening &amp; Test</h3>
+            <p style="font-size:13px;line-height:1.65;color:var(--muted);">Skills verification, trade testing and background checks for every candidate.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:22px;width:19%;">
+            <div style="width:38px;height:38px;border-radius:50%;background:var(--ink-2);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;">
+              <span class="mono" style="font-size:12px;color:var(--gold);">03</span>
+            </div>
+            <h3 style="font-size:18px;color:var(--ivory);font-family:'Manrope';font-weight:700;">Interview</h3>
+            <p style="font-size:13px;line-height:1.65;color:var(--muted);">Employer interviews shortlisted candidates and confirms final selection.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:22px;width:19%;">
+            <div style="width:38px;height:38px;border-radius:50%;background:var(--ink-2);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;">
+              <span class="mono" style="font-size:12px;color:var(--gold);">04</span>
+            </div>
+            <h3 style="font-size:18px;color:var(--ivory);font-family:'Manrope';font-weight:700;">Visa &amp; Papers</h3>
+            <p style="font-size:13px;line-height:1.65;color:var(--muted);">Work permit, visa and compliance paperwork handled for both parties.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:22px;width:19%;">
+            <div style="width:38px;height:38px;border-radius:50%;background:var(--gold);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;">
+              <span class="mono" style="font-size:12px;color:var(--ink);">05</span>
+            </div>
+            <h3 style="font-size:18px;color:var(--ivory);font-family:'Manrope';font-weight:700;">Deployment</h3>
+            <p style="font-size:13px;line-height:1.65;color:var(--muted);">Travel arranged, with onboarding and after-placement support in Singapore.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ WHY CHOOSE US (declaration) ============ -->
+  <div style="padding:120px 0 110px;position:relative;z-index:2;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:0.8fr 1.2fr;gap:60px;">
+      <div>
+        <div class="tag" style="color:var(--gold-dim);margin-bottom:16px;">Declaration</div>
+        <h2 style="font-size:40px;color:var(--ivory);">Verify us <span class="script" style="color:var(--gold);">before</span> you trust us.</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <div style="display:flex;gap:22px;padding:24px 0;border-bottom:1px dashed var(--line);align-items:flex-start;">
+          <svg width="22" height="22" style="flex-shrink:0;margin-top:3px;" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>
+          <div style="display:flex;justify-content:space-between;flex:1;gap:20px;align-items:baseline;">
+            <div>
+              <h3 style="font-size:17px;font-family:'Manrope';font-weight:700;color:var(--ivory);margin-bottom:6px;">Licensed &amp; Compliant</h3>
+              <p style="font-size:13.5px;line-height:1.6;color:var(--muted);max-width:520px;">Operating within Singapore's MOM framework and Indian recruitment regulations.</p>
+            </div>
+            <span class="mono" style="font-size:10.5px;color:var(--muted);white-space:nowrap;">ART. 01</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:22px;padding:24px 0;border-bottom:1px dashed var(--line);align-items:flex-start;">
+          <svg width="22" height="22" style="flex-shrink:0;margin-top:3px;" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>
+          <div style="display:flex;justify-content:space-between;flex:1;gap:20px;align-items:baseline;">
+            <div>
+              <h3 style="font-size:17px;font-family:'Manrope';font-weight:700;color:var(--ivory);margin-bottom:6px;">End-to-End Support</h3>
+              <p style="font-size:13.5px;line-height:1.6;color:var(--muted);max-width:520px;">One team handles sourcing through to post-deployment &#8212; no handoffs, no gaps.</p>
+            </div>
+            <span class="mono" style="font-size:10.5px;color:var(--muted);white-space:nowrap;">ART. 02</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:22px;padding:24px 0;border-bottom:1px dashed var(--line);align-items:flex-start;">
+          <svg width="22" height="22" style="flex-shrink:0;margin-top:3px;" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>
+          <div style="display:flex;justify-content:space-between;flex:1;gap:20px;align-items:baseline;">
+            <div>
+              <h3 style="font-size:17px;font-family:'Manrope';font-weight:700;color:var(--ivory);margin-bottom:6px;">Verified Talent Pool</h3>
+              <p style="font-size:13.5px;line-height:1.6;color:var(--muted);max-width:520px;">Every candidate is screened, trade-tested and background-checked before shortlisting.</p>
+            </div>
+            <span class="mono" style="font-size:10.5px;color:var(--muted);white-space:nowrap;">ART. 03</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:22px;padding:24px 0;align-items:flex-start;">
+          <svg width="22" height="22" style="flex-shrink:0;margin-top:3px;" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>
+          <div style="display:flex;justify-content:space-between;flex:1;gap:20px;align-items:baseline;">
+            <div>
+              <h3 style="font-size:17px;font-family:'Manrope';font-weight:700;color:var(--ivory);margin-bottom:6px;">Transparent Pricing</h3>
+              <p style="font-size:13.5px;line-height:1.6;color:var(--muted);max-width:520px;">Clear terms for employers and job seekers alike &#8212; no hidden costs, ever.</p>
+            </div>
+            <span class="mono" style="font-size:10.5px;color:var(--muted);white-space:nowrap;">ART. 04</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CONTACT (boarding pass) ============ -->
+  <div id="contact" style="background:var(--ink-2);padding:120px 0;position:relative;z-index:2;">
+    <div style="max-width:1180px;margin:0 auto;padding:0 40px;">
+      <div style="background:var(--cream);color:var(--ink);display:grid;grid-template-columns:1.5fr 1fr;box-shadow:0 30px 60px -20px oklch(0% 0 0 / 0.5);position:relative;">
+
+        <div style="padding:56px 56px;position:relative;">
+          <div class="notch" style="top:-11px;left:-11px;"></div>
+          <div class="notch" style="bottom:-11px;left:-11px;top:auto;"></div>
+          <div class="tag" style="color:var(--maroon);margin-bottom:18px;">Boarding Pass &#8226; Full Service</div>
+          <h2 style="font-size:38px;color:var(--ink);max-width:440px;margin-bottom:34px;">Ready to place your next hire, or your next role?</h2>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:460px;">
+            <div>
+              <div class="tag" style="color:var(--muted-d);margin-bottom:6px;">From</div>
+              <div class="mono" style="font-size:15px;font-weight:600;">IND</div>
+            </div>
+            <div>
+              <div class="tag" style="color:var(--muted-d);margin-bottom:6px;">To</div>
+              <div class="mono" style="font-size:15px;font-weight:600;">SGP</div>
+            </div>
+            <div>
+              <div class="tag" style="color:var(--muted-d);margin-bottom:6px;">Status</div>
+              <div class="mono" style="font-size:15px;font-weight:600;color:var(--maroon);">Confirmed</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="border-left:1px dashed oklch(20% 0.02 85 / 0.3);padding:56px 44px;display:flex;flex-direction:column;gap:22px;justify-content:center;position:relative;">
+          <div class="notch" style="top:-11px;right:-11px;left:auto;"></div>
+          <div class="notch" style="bottom:-11px;right:-11px;left:auto;top:auto;"></div>
+          <a href="#" class="btn btn-primary" style="justify-content:center;">Talk to Our Team</a>
+          <a href="#" class="btn" style="justify-content:center;background:transparent;border:1px solid var(--ink);color:var(--ink);">Chat on WhatsApp</a>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:10px;font-size:13px;color:oklch(30% 0.02 258 / 0.8);">
+            <span class="mono">[+91 XXXXX XXXXX]</span>
+            <span class="mono">[enquiries@gt-jobs.com]</span>
+            <span class="mono" style="font-size:11.5px;">[Registered office, City, India]</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div style="padding:64px 0 40px;position:relative;z-index:2;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+      <div style="display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid var(--line);">
+        <div>
+          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:14px;">
+            <span style="font-family:'Libre Caslon Display',serif;font-size:21px;color:var(--gold);">GT</span>
+            <span class="script" style="font-size:17px;color:var(--ivory);">Jobs</span>
+          </div>
+          <p style="font-size:13px;line-height:1.7;color:var(--muted);max-width:240px;">GT Manpower Recruitment &#8212; connecting verified workers with Singapore employers since [20XX].</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:13.5px;color:oklch(80% 0.02 85);">
+          <span class="tag" style="color:var(--muted);margin-bottom:2px;">Company</span>
+          <a href="#industries">Industries</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:13.5px;color:oklch(80% 0.02 85);">
+          <span class="tag" style="color:var(--muted);margin-bottom:2px;">Employers</span>
+          <a href="#employers">Request Manpower</a>
+          <a href="#process">Our Process</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:13.5px;color:oklch(80% 0.02 85);">
+          <span class="tag" style="color:var(--muted);margin-bottom:2px;">Job Seekers</span>
+          <a href="#seekers">Apply Now</a>
+          <a href="#">FAQs</a>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:28px;">
+        <span class="mono" style="font-size:11.5px;color:var(--muted);">&#169; 2026 GT Jobs. All rights reserved. &nbsp; / &nbsp; [Recruitment License No. XXXXXXX]</span>
+        <svg width="120" height="22" viewBox="0 0 120 22">
+          <g fill="var(--muted)">
+            <rect x="0" y="0" width="2" height="22"/><rect x="4" y="0" width="1" height="22"/><rect x="7" y="0" width="3" height="22"/><rect x="12" y="0" width="1" height="22"/><rect x="15" y="0" width="2" height="22"/><rect x="19" y="0" width="1" height="22"/><rect x="22" y="0" width="4" height="22"/><rect x="28" y="0" width="1" height="22"/><rect x="31" y="0" width="2" height="22"/><rect x="35" y="0" width="1" height="22"/><rect x="38" y="0" width="3" height="22"/><rect x="43" y="0" width="1" height="22"/><rect x="46" y="0" width="2" height="22"/><rect x="50" y="0" width="1" height="22"/><rect x="53" y="0" width="4" height="22"/><rect x="59" y="0" width="1" height="22"/><rect x="62" y="0" width="2" height="22"/><rect x="66" y="0" width="1" height="22"/><rect x="69" y="0" width="3" height="22"/><rect x="74" y="0" width="1" height="22"/><rect x="77" y="0" width="2" height="22"/><rect x="81" y="0" width="1" height="22"/><rect x="84" y="0" width="4" height="22"/><rect x="90" y="0" width="1" height="22"/><rect x="93" y="0" width="2" height="22"/><rect x="97" y="0" width="1" height="22"/><rect x="100" y="0" width="3" height="22"/><rect x="105" y="0" width="1" height="22"/><rect x="108" y="0" width="2" height="22"/><rect x="112" y="0" width="1" height="22"/><rect x="115" y="0" width="3" height="22"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
